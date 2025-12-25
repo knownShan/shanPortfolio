@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shan // Game Dev Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-black: #050505;
+            --dark-grey: #1a1a1a;
+            --medium-grey: #333333;
+            --pixel-green: #39ff14;
+            --pure-white: #ffffff;
+        }
+
+        /* Essential for the "Smooth Slide" */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Reset & Base */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--pure-white);
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .btn-outline {
+            font-family: 'Press Start 2P', cursive;
+            text-transform: uppercase;
+        }
+
+        /* --- SECTION 1: INTRODUCTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--medium-grey);
+        }
+
+        .hero-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 8%;
+            background: var(--bg-black);
+            z-index: 5;
+        }
+
+        .hero-left h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 10px;
+            color: var(--pure-white);
+            text-shadow: 6px 6px 0px var(--pixel-green);
+        }
+
+        .hero-left .subtitle {
+            font-size: 1.8rem;
+            color: var(--pixel-green);
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 2px solid var(--pure-white);
+            color: var(--pure-white);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-outline:hover {
+            background: var(--pure-white);
+            color: var(--bg-black);
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            transform: translateY(-5px);
+        }
+
+        .hero-right {
+            flex: 1.2;
+            position: relative;
+            background: var(--dark-grey);
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+            margin-left: -10%;
+        }
+
+        .hero-right video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 10%;
+            text-align: right;
+            pointer-events: none;
+        }
+
+        .video-overlay h2 {
+            font-size: 1.5rem;
+            max-width: 300px;
+            line-height: 1.5;
+            text-shadow: 3px 3px 0px var(--bg-black);
+        }
+
+        /* --- SECTION 2: COLLECTION --- */
+        .collection {
+            min-height: 100vh;
+            padding: 100px 10%;
+            background-color: var(--dark-grey);
+        }
+
+        .section-title {
+            color: var(--pure-white);
+            font-size: 1.5rem;
+            margin-bottom: 60px;
+            text-align: center;
+            border-bottom: 4px solid var(--medium-grey);
+            padding-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .game-card {
+            background: var(--bg-black);
+            border: 4px solid var(--medium-grey);
+            padding: 10px;
+            transition: 0.2s;
+            height: 100%;
+        }
+
+        .game-card:hover {
+            border-color: var(--pixel-green);
+            transform: scale(1.02);
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 180px;
+            background: var(--medium-grey);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content h3 {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            color: var(--pixel-green);
+        }
+
+        .card-content p {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #ccc;
+            height: 3.6rem;
+            overflow: hidden;
+        }
+
+        .tag-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--medium-grey);
+            padding: 2px 8px;
+            font-size: 1rem;
+            color: var(--pure-white);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-black); }
+        ::-webkit-scrollbar-thumb { background: var(--medium-grey); border: 2px solid var(--bg-black); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--pixel-green); }
+
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; height: auto; }
+            .hero-right { 
+                clip-path: none; 
+                margin-left: 0; 
+                height: 50vh; 
+            }
+            .hero-left { padding: 80px 8%; text-align: center; align-items: center;}
+            .video-overlay { align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-left">
+            <h1>SHAN</h1>
+            <p class="subtitle">Game Developer</p>
+            <a href="#games" class="btn-outline">EXPLORE NOW !</a>
+        </div>
+
+        <div class="hero-right">
+            <video src="your-trailer.mp4" autoplay muted loop playsinline></video>
+            <div class="video-overlay">
+                <i data-lucide="monitor-play" size="80" color="#39ff14" style="margin-bottom: 20px;"></i>
+                <h2>SHOWCASE SCREEN TRAILERS</h2>
+                <div style="margin-top: 40px; opacity: 0.5;">
+                    <p style="font-size: 1.2rem;">MADE WITH UNITY</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="collection" id="games">
+        <h2 class="section-title">MY GAMES</h2>
+
+        <div class="grid">
+            <a href="game-details.html?id=nestiny" style="text-decoration: none; color: inherit;">
+                <div class="game-card">
+                    <div class="thumbnail">
+                        <img src="GamePictures/Nestiny Cover.jpg" alt="Nestiny Game Cover">
+                    </div>
+                    <div class="card-content">
+                        <h3>NESTINY</h3>
+                        <p>A 2D Platformer where chicken on a desperate quest to retrieve your scattered eggs</p>
+                        <div class="tag-row">
+                            <span class="tag">UNITY</span>
+                            <span class="tag">C#</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="game-details.html?id=think-inside-the-box" style="text-decoration: none; color: inherit;">
+                <div class="game-card">
+                    <div class="thumbnail">
+                        <img src="GamePictures/Think Inside the Box Cover.jpg" alt="Think Inside the Box Cover">
+                    </div>
+                    <div class="card-content">
+                        <h3>THINK INSIDE THE BOX</h3>
+                        <p>A puzzle-platformer where you play as a walking box trapped in a dangerous parcel factory.</p>
+                        <div class="tag-row">
+                            <span class="tag">UNITY</span>
+                            <span class="tag">C#</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="game-details.html?id=void-runner" style="text-decoration: none; color: inherit;">
+                <div class="game-card">
+                    <div class="thumbnail">
+                         <img src="https://placehold.co/600x400/000000/39ff14?text=VOID+RUNNER+ART" alt="Void Runner Game Cover">
+                    </div>
+                    <div class="card-content">
+                        <h3>VOID_RUNNER</h3>
+                        <p>High-speed space racer using custom shader gravity.</p>
+                        <div class="tag-row">
+                            <span class="tag">UNITY</span>
+                            <span class="tag">C#</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
